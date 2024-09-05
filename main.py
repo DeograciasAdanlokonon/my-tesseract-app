@@ -2,6 +2,7 @@ from flask import Flask, render_template
 # import our OCR function
 from PIL import Image
 import pytesseract
+import os
 
 image = Image.open('image.jpg')
 # Perform OCR using pytesseract
@@ -16,4 +17,4 @@ def home():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
