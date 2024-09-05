@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 # import our OCR function
 from PIL import Image
 import pytesseract
@@ -6,14 +6,14 @@ import os
 
 image = Image.open('image.jpg')
 # Perform OCR using pytesseract
-text = pytesseract.image_to_string(image)
+result = pytesseract.image_to_string(image)
 
 app = Flask(__name__)
 
 
 @app.route('/')
 def home():
-    return f'<h3>{text}</h3>'
+    return jsonify({"response": {"text": result}}), 200
 
 
 if __name__ == "__main__":
